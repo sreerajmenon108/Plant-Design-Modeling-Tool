@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kent Mahal STP Management System</title>
+    <title>Kent Mahal Sullage & Maintenance Management System</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -37,7 +37,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight tracking-wide">Kent Mahal STP Management Portal</h1>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide">Kent Mahal Sullage & Maintenance Portal</h1>
                     <p class="text-xs text-brand-200">Resident & Facility Operations Portal</p>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                         <h3 class="text-xl font-bold text-slate-900 flex items-center">
                             <i class="fa-solid fa-sliders text-brand-600 mr-2"></i>Configure Family Members Parameters
                         </h3>
-                        <p class="text-xs text-slate-500 mt-1">Configure your household water usage parameters. Data is securely saved to Google Sheets.</p>
+                        <p class="text-xs text-slate-500 mt-1">Configure your household water usage parameters. Checked morning/evening boxes determine how many times per day each activity is calculated.</p>
                     </div>
                     <span id="resident-flat-badge" class="bg-brand-50 text-brand-700 px-3 py-1.5 rounded-lg font-bold text-sm border border-brand-200"></span>
                 </div>
@@ -148,19 +148,22 @@
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Bathing Volume / Person / Bath (L)</label>
                             <input type="number" id="res_bathLiters" value="40" min="0" max="150" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
-                            <span class="text-xs text-slate-400">Baseline: 40L per bath (2 baths/day)</span>
+                            <span class="text-xs text-slate-400">Calculated per checked bath period below</span>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Teeth Brushing Duration (sec)</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Teeth Brushing Duration / Period (sec)</label>
                             <input type="number" id="res_brushSec" value="50" min="0" max="300" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
+                            <span class="text-xs text-slate-400">Calculated per checked brushing period below</span>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Handwashing Duration / Period (sec)</label>
                             <input type="number" id="res_handSec" value="30" min="0" max="300" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
+                            <span class="text-xs text-slate-400">Calculated per checked handwash period below</span>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Kitchen Cleaning Duration (sec/day)</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Kitchen Cleaning Duration / Period (sec)</label>
                             <input type="number" id="res_kitchenSec" value="180" min="0" max="900" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
+                            <span class="text-xs text-slate-400">Calculated per checked kitchen period below</span>
                         </div>
                         <div class="md:col-span-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
                             <div class="flex items-center justify-between mb-2">
@@ -169,11 +172,11 @@
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <span class="text-xs text-slate-500 block mb-1">Loads / Day</span>
+                                    <span class="text-xs text-slate-500 block mb-1">Loads / Period</span>
                                     <input type="number" id="res_laundryLoads" value="1" min="0" max="5" class="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm">
                                 </div>
                                 <div>
-                                    <span class="text-xs text-slate-500 block mb-1">Buckets / Load</span>
+                                    <span class="text-xs text-slate-500 block mb-1">Buckets / Load (20L each)</span>
                                     <input type="number" id="res_laundryBuckets" value="3" min="1" max="10" class="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm">
                                 </div>
                             </div>
@@ -182,7 +185,8 @@
 
                     <!-- Peak Period Timing Checkboxes -->
                     <div class="border-t border-slate-200 pt-5">
-                        <h4 class="text-sm font-bold text-slate-900 mb-3">Peak Period Timing Checkboxes (Morning vs Evening Allocation)</h4>
+                        <h4 class="text-sm font-bold text-slate-900 mb-1">Peak Period Timing Checkboxes (Morning vs Evening Allocation)</h4>
+                        <p class="text-xs text-slate-500 mb-3">Checking both Morning & Evening calculates that activity twice (2x); checking one calculates it once (1x); checking neither excludes it (0x).</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
                             <div>
                                 <span class="font-bold text-slate-700 uppercase block mb-2">Teeth Brushing</span>
@@ -192,17 +196,17 @@
                             <div>
                                 <span class="font-bold text-slate-700 uppercase block mb-2">Bathing Timing</span>
                                 <label class="flex items-center mb-1.5 cursor-pointer"><input type="checkbox" id="t_bathMorning" checked class="mr-2 rounded">Morning Bath</label>
-                                <label class="flex items-center cursor-pointer"><input type="checkbox" id="t_bathEvening" class="mr-2 rounded">Evening Bath</label>
+                                <label class="flex items-center cursor-pointer"><input type="checkbox" id="t_bathEvening" checked class="mr-2 rounded">Evening Bath</label>
                             </div>
                             <div>
                                 <span class="font-bold text-slate-700 uppercase block mb-2">Handwashing Timing</span>
                                 <label class="flex items-center mb-1.5 cursor-pointer"><input type="checkbox" id="t_handMorning" checked class="mr-2 rounded">Morning Handwash</label>
-                                <label class="flex items-center cursor-pointer"><input type="checkbox" id="t_handEvening" class="mr-2 rounded">Evening Handwash</label>
+                                <label class="flex items-center cursor-pointer"><input type="checkbox" id="t_handEvening" checked class="mr-2 rounded">Evening Handwash</label>
                             </div>
                             <div>
                                 <span class="font-bold text-slate-700 uppercase block mb-2">Kitchen & Laundry</span>
                                 <label class="flex items-center mb-1 cursor-pointer"><input type="checkbox" id="t_kitchenMorning" checked class="mr-2 rounded">Morning Kitchen</label>
-                                <label class="flex items-center mb-1 cursor-pointer"><input type="checkbox" id="t_kitchenEvening" class="mr-2 rounded">Evening Kitchen</label>
+                                <label class="flex items-center mb-1 cursor-pointer"><input type="checkbox" id="t_kitchenEvening" checked class="mr-2 rounded">Evening Kitchen</label>
                                 <label class="flex items-center mb-1 cursor-pointer"><input type="checkbox" id="t_laundryMorning" checked class="mr-2 rounded">Morning Laundry</label>
                                 <label class="flex items-center cursor-pointer"><input type="checkbox" id="t_laundryEvening" class="mr-2 rounded">Evening Laundry</label>
                             </div>
@@ -308,11 +312,12 @@
                         <thead>
                             <tr class="bg-slate-100 text-slate-700 text-xs uppercase">
                                 <th class="py-2.5 px-3">Resident / Flat</th>
-                                <th class="py-2.5 px-3">Residents</th>
-                                <th class="py-2.5 px-3">Flushes (Day/Night)</th>
-                                <th class="py-2.5 px-3">Sewage (Flushes)</th>
+                                <th class="py-2.5 px-3">Res.</th>
+                                <th class="py-2.5 px-3">Flushes (D/N)</th>
+                                <th class="py-2.5 px-3">Active Periods (Ba/Br/Ha/Ki/La)</th>
+                                <th class="py-2.5 px-3">Sewage (6L/flush)</th>
                                 <th class="py-2.5 px-3">Sullage (Greywater)</th>
-                                <th class="py-2.5 px-3">Total Daily Generation</th>
+                                <th class="py-2.5 px-3">Total Daily Gen.</th>
                             </tr>
                         </thead>
                         <tbody id="admin-breakdown-tbody" class="divide-y divide-slate-100 text-slate-700"></tbody>
@@ -323,11 +328,49 @@
 
         <!-- DBADMIN PORTAL VIEW -->
         <div id="dbadmin-view" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-                <h3 class="text-lg font-bold text-slate-900 mb-2">DBAdmin Portal - Database Status</h3>
-                <p class="text-xs text-slate-500 mb-4">Connected securely to Google Sheets backend database tables.</p>
-                <div class="bg-emerald-50 text-emerald-800 border border-emerald-200 p-4 rounded-xl text-sm font-semibold">
-                    <i class="fa-solid fa-circle-check mr-2"></i>Database tables `Residents`, `Admins`, `AdminSettings`, and `ResidentConfigurations` are fully active and synchronized.
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center">
+                            <i class="fa-solid fa-database text-indigo-700 mr-2"></i>DBAdmin Portal - Live Google Sheets Manager
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-1">View, filter, clear individual cells, delete rows, or reset database tables.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <select id="db-sheet-select" onchange="loadDbTable()" class="rounded-xl border border-slate-300 px-3 py-2 text-xs font-semibold bg-white focus:ring-2 focus:ring-indigo-500">
+                            <option value="ResidentConfigurations">ResidentConfigurations</option>
+                            <option value="AdminSettings">AdminSettings</option>
+                            <option value="Residents">Residents (Directory)</option>
+                            <option value="Admins">Admins</option>
+                        </select>
+                        <button onclick="loadDbTable()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold px-3 py-2 rounded-xl transition">
+                            <i class="fa-solid fa-rotate mr-1"></i>Refresh
+                        </button>
+                        <button onclick="resetDbTable()" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-semibold px-3 py-2 rounded-xl transition">
+                            <i class="fa-solid fa-arrow-rotate-left mr-1"></i>Reset Table Values
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search / Filter Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <div class="relative w-full sm:w-96">
+                        <input type="text" id="db-filter-input" oninput="renderDbTable()" placeholder="Filter rows by username, flat, tower, or value..." class="w-full rounded-xl border border-slate-300 pl-9 pr-3.5 py-2 text-xs focus:ring-2 focus:ring-indigo-500">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs absolute left-3 top-2.5"></i>
+                    </div>
+                    <span id="db-row-count" class="text-xs font-semibold text-slate-500">0 records shown</span>
+                </div>
+
+                <p class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                    <i class="fa-solid fa-circle-info text-indigo-600 mr-1"></i><strong>Tip:</strong> Hover over any cell and click the small <strong>&times;</strong> icon to clear that specific cell value, or click <strong>Delete Row</strong> on the right to remove the entire record.
+                </p>
+
+                <!-- Dynamic DB Table Container -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200 max-h-[550px]">
+                    <table class="w-full text-left border-collapse text-xs font-mono">
+                        <thead id="db-table-thead" class="bg-slate-900 text-white uppercase sticky top-0 z-10"></thead>
+                        <tbody id="db-table-tbody" class="divide-y divide-slate-200 bg-white text-slate-800"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -365,7 +408,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
-        Kent Mahal Apartment Owners Association &bull; STP Management System
+        Kent Mahal Apartment Owners Association &bull; Sullage & Maintenance Management System
     </footer>
 
     <!-- App Script Logic -->
@@ -376,6 +419,8 @@
         let cachedCredentials = null;
         let currentSession = null;
         let adminDataCache = null;
+        let currentDbRows = [];
+        let currentDbSheet = "ResidentConfigurations";
 
         function showLoading(show) {
             const overlay = document.getElementById('loading-overlay');
@@ -464,7 +509,7 @@
             } catch (err) {
                 showLoading(false);
                 errDiv.textContent = "Connection error during login.";
-                errDiv.classList.add('hidden');
+                errDiv.classList.remove('hidden');
             }
         }
 
@@ -484,11 +529,53 @@
                 if (profile) {
                     document.getElementById('resident-flat-badge').textContent = `Tower ${profile.tower} - #${profile.flat}`;
                 }
+                // Load existing saved configuration for this resident if available
+                await loadResidentExistingConfig(currentSession.username);
             } else if (currentSession.role === 'admin') {
                 document.getElementById('admin-view').classList.remove('hidden');
                 await loadAdminData();
             } else if (currentSession.role === 'dbadmin') {
                 document.getElementById('dbadmin-view').classList.remove('hidden');
+                await loadDbTable();
+            }
+        }
+
+        async function loadResidentExistingConfig(username) {
+            showLoading(true);
+            try {
+                const res = await fetch(`${API_ENDPOINT}?action=getAdminData`);
+                const data = await res.json();
+                if (data.status === 'success' && data.submissions) {
+                    const existing = data.submissions.find(s => s.username === username);
+                    if (existing) {
+                        document.getElementById('res_residents').value = existing.residents;
+                        document.getElementById('res_flushDay').value = existing.flushDay;
+                        document.getElementById('res_flushNight').value = existing.flushNight;
+                        document.getElementById('res_bathLiters').value = existing.bathLiters;
+                        document.getElementById('res_brushSec').value = existing.brushSec;
+                        document.getElementById('res_handSec').value = existing.handSec;
+                        document.getElementById('res_kitchenSec').value = existing.kitchenSec;
+                        document.getElementById('res_laundryActive').checked = existing.laundryActive;
+                        document.getElementById('res_laundryLoads').value = existing.laundryLoads;
+                        document.getElementById('res_laundryBuckets').value = existing.laundryBuckets;
+
+                        const t = existing.timing || {};
+                        document.getElementById('t_brushMorning').checked = !!t.brushMorning;
+                        document.getElementById('t_brushEvening').checked = !!t.brushEvening;
+                        document.getElementById('t_bathMorning').checked = !!t.bathMorning;
+                        document.getElementById('t_bathEvening').checked = !!t.bathEvening;
+                        document.getElementById('t_handMorning').checked = !!t.handMorning;
+                        document.getElementById('t_handEvening').checked = !!t.handEvening;
+                        document.getElementById('t_kitchenMorning').checked = !!t.kitchenMorning;
+                        document.getElementById('t_kitchenEvening').checked = !!t.kitchenEvening;
+                        document.getElementById('t_laundryMorning').checked = !!t.laundryMorning;
+                        document.getElementById('t_laundryEvening').checked = !!t.laundryEvening;
+                    }
+                }
+            } catch (err) {
+                console.error("Error preloading resident config:", err);
+            } finally {
+                showLoading(false);
             }
         }
 
@@ -599,7 +686,7 @@
                 const data = await res.json();
                 showLoading(false);
                 if (data.status === 'success') {
-                    alert("Your household parameters were successfully saved to Google Sheets!");
+                    alert("Your household parameters and peak timing choices were saved to Google Sheets!");
                 }
             } catch (err) {
                 showLoading(false);
@@ -656,18 +743,27 @@
             let breakdownHtml = '';
 
             submissions.forEach(sub => {
-                // Sewage (blackwater) calculated directly from flush usage (~10L per flush)
+                const t = sub.timing || {};
+
+                // Count active morning/evening periods (0, 1, or 2) per activity
+                const bathPeriods = (t.bathMorning ? 1 : 0) + (t.bathEvening ? 1 : 0);
+                const brushPeriods = (t.brushMorning ? 1 : 0) + (t.brushEvening ? 1 : 0);
+                const handPeriods = (t.handMorning ? 1 : 0) + (t.handEvening ? 1 : 0);
+                const kitchenPeriods = (t.kitchenMorning ? 1 : 0) + (t.kitchenEvening ? 1 : 0);
+                const laundryPeriods = (t.laundryMorning ? 1 : 0) + (t.laundryEvening ? 1 : 0);
+
+                // Sewage (blackwater) calculated from flush usage (6L per flush)
                 const sewageVol = (sub.flushDay + sub.flushNight) * 6;
                 
-                // Sullage (greywater) calculated from bathing, brushing, handwashing, kitchen, and laundry
-                const bathVol = sub.residents * sub.bathLiters * 2; // 2 baths per day
-                const brushVol = sub.residents * sub.brushSec * q;
-                const handVol = sub.residents * sub.handSec * q;
-                const kitchenVol = sub.kitchenSec * q;
+                // Sullage (greywater) multiplied by the active period count (0x, 1x, or 2x)
+                const bathVol = sub.residents * sub.bathLiters * bathPeriods;
+                const brushVol = sub.residents * sub.brushSec * q * brushPeriods;
+                const handVol = sub.residents * sub.handSec * q * handPeriods;
+                const kitchenVol = sub.kitchenSec * q * kitchenPeriods;
                 
                 let laundryVol = 0;
                 if (sub.laundryActive) {
-                    laundryVol = sub.laundryLoads * sub.laundryBuckets * 20;
+                    laundryVol = sub.laundryLoads * sub.laundryBuckets * 20 * laundryPeriods;
                 }
 
                 const sullageVol = bathVol + brushVol + handVol + kitchenVol + laundryVol;
@@ -681,6 +777,7 @@
                         <td class="py-2.5 px-3 font-semibold">${sub.username} (T${sub.tower} - #${sub.flat})</td>
                         <td class="py-2.5 px-3">${sub.residents}</td>
                         <td class="py-2.5 px-3">${sub.flushDay} / ${sub.flushNight}</td>
+                        <td class="py-2.5 px-3 text-xs font-mono text-slate-600">${bathPeriods}x / ${brushPeriods}x / ${handPeriods}x / ${kitchenPeriods}x / ${laundryPeriods}x</td>
                         <td class="py-2.5 px-3 font-medium text-indigo-700">${sewageVol.toFixed(1)} L/day</td>
                         <td class="py-2.5 px-3 font-medium text-blue-700">${sullageVol.toFixed(1)} L/day</td>
                         <td class="py-2.5 px-3 font-bold text-slate-900">${totalSubGeneration.toFixed(1)} L/day</td>
@@ -743,8 +840,164 @@
                 sewageSubtitle.innerText = "Capacity is sufficient for retention period.";
             }
 
-            document.getElementById('admin-breakdown-tbody').innerHTML = breakdownHtml || `<tr><td colspan="6" class="py-4 text-center text-slate-400">No resident submissions recorded yet.</td></tr>`;
+            document.getElementById('admin-breakdown-tbody').innerHTML = breakdownHtml || `<tr><td colspan="7" class="py-4 text-center text-slate-400">No resident submissions recorded yet.</td></tr>`;
             document.getElementById('admin-results-container').classList.remove('hidden');
+        }
+
+        // --- DBADMIN PORTAL FUNCTIONS ---
+        async function loadDbTable() {
+            currentDbSheet = document.getElementById('db-sheet-select').value;
+            showLoading(true);
+            try {
+                const res = await fetch(`${API_ENDPOINT}?action=getDbTable&sheet=${encodeURIComponent(currentDbSheet)}`);
+                const data = await res.json();
+                showLoading(false);
+                if (data.status === 'success') {
+                    currentDbRows = data.rows || [];
+                    renderDbTable();
+                } else {
+                    alert("Error loading table: " + data.message);
+                }
+            } catch (err) {
+                showLoading(false);
+                alert("Failed to connect to database table.");
+            }
+        }
+
+        function renderDbTable() {
+            const thead = document.getElementById('db-table-thead');
+            const tbody = document.getElementById('db-table-tbody');
+            const filter = document.getElementById('db-filter-input').value.toLowerCase();
+
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            if (!currentDbRows || currentDbRows.length === 0) {
+                tbody.innerHTML = `<tr><td class="p-4 text-center text-slate-400">Table is empty.</td></tr>`;
+                document.getElementById('db-row-count').textContent = '0 records shown';
+                return;
+            }
+
+            const headers = currentDbRows[0];
+            let headHtml = '<tr><th class="py-2.5 px-3">Row #</th>';
+            headers.forEach(h => {
+                headHtml += `<th class="py-2.5 px-3">${h}</th>`;
+            });
+            headHtml += '<th class="py-2.5 px-3 text-right">Row Action</th></tr>';
+            thead.innerHTML = headHtml;
+
+            let visibleCount = 0;
+            // Iterate starting from row index 1 (Google Sheet Row 2)
+            for (let r = 1; r < currentDbRows.length; r++) {
+                const row = currentDbRows[r];
+                const sheetRowIndex = r + 1; // 1-based row number in Google Sheet
+                const rowText = row.join(' ').toLowerCase();
+                if (filter && !rowText.includes(filter)) continue;
+
+                visibleCount++;
+                let trHtml = `<tr class="hover:bg-slate-50 transition"><td class="py-2 px-3 font-bold text-slate-400">${sheetRowIndex}</td>`;
+                
+                row.forEach((cellVal, cIdx) => {
+                    const sheetColIndex = cIdx + 1; // 1-based column number
+                    const displayVal = cellVal === "" || cellVal === null || cellVal === undefined ? '<span class="text-slate-300 italic">empty</span>' : String(cellVal);
+                    const isProtectedPwd = (currentDbSheet === 'Residents' || currentDbSheet === 'Admins') && cIdx === 1;
+                    
+                    trHtml += `
+                        <td class="py-2 px-3 border-r border-slate-100 group relative max-w-[200px] truncate" title="${String(cellVal)}">
+                            <span>${displayVal}</span>
+                            ${!isProtectedPwd ? `<button onclick="clearDbCell(${sheetRowIndex}, ${sheetColIndex})" title="Clear cell value" class="hidden group-hover:inline-block ml-2 text-red-500 hover:text-red-700 font-bold px-1 rounded bg-red-50">&times;</button>` : ''}
+                        </td>
+                    `;
+                });
+
+                trHtml += `
+                    <td class="py-2 px-3 text-right whitespace-nowrap">
+                        <button onclick="deleteDbRow(${sheetRowIndex})" class="text-xs bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 px-2.5 py-1 rounded-lg font-semibold transition">Delete Row</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += trHtml;
+            }
+
+            if (visibleCount === 0) {
+                tbody.innerHTML = `<tr><td colspan="${headers.length + 2}" class="p-6 text-center text-slate-400">No matching records found.</td></tr>`;
+            }
+            document.getElementById('db-row-count').textContent = `${visibleCount} record${visibleCount === 1 ? '' : 's'} shown`;
+        }
+
+        async function clearDbCell(rowIndex, colIndex) {
+            if (!confirm(`Clear value in Row ${rowIndex}, Column ${colIndex} of ${currentDbSheet}?`)) return;
+            showLoading(true);
+            try {
+                const res = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'dbClearCell',
+                        sheetName: currentDbSheet,
+                        rowIndex: rowIndex,
+                        colIndex: colIndex
+                    })
+                });
+                const data = await res.json();
+                showLoading(false);
+                if (data.status === 'success') {
+                    await loadDbTable();
+                } else {
+                    alert("Failed to clear cell: " + data.message);
+                }
+            } catch (err) {
+                showLoading(false);
+                alert("Error clearing cell.");
+            }
+        }
+
+        async function deleteDbRow(rowIndex) {
+            if (!confirm(`Are you sure you want to permanently delete Row ${rowIndex} from ${currentDbSheet}?`)) return;
+            showLoading(true);
+            try {
+                const res = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'dbDeleteRow',
+                        sheetName: currentDbSheet,
+                        rowIndex: rowIndex
+                    })
+                });
+                const data = await res.json();
+                showLoading(false);
+                if (data.status === 'success') {
+                    await loadDbTable();
+                } else {
+                    alert("Failed to delete row: " + data.message);
+                }
+            } catch (err) {
+                showLoading(false);
+                alert("Error deleting row.");
+            }
+        }
+
+        async function resetDbTable() {
+            if (!confirm(`Are you sure you want to reset all values in ${currentDbSheet} to default? This cannot be undone.`)) return;
+            showLoading(true);
+            try {
+                const res = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'dbResetTable',
+                        sheetName: currentDbSheet
+                    })
+                });
+                const data = await res.json();
+                showLoading(false);
+                if (data.status === 'success') {
+                    alert(`${currentDbSheet} has been reset to defaults.`);
+                    await loadDbTable();
+                } else {
+                    alert("Reset info: " + data.message);
+                }
+            } catch (err) {
+                showLoading(false);
+                alert("Error resetting table.");
+            }
         }
 
         // Initialize App
