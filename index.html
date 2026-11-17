@@ -657,7 +657,7 @@
 
             submissions.forEach(sub => {
                 // Sewage (blackwater) calculated directly from flush usage (~10L per flush)
-                const sewageVol = (sub.flushDay + sub.flushNight) * 10;
+                const sewageVol = (sub.flushDay + sub.flushNight) * 6;
                 
                 // Sullage (greywater) calculated from bathing, brushing, handwashing, kitchen, and laundry
                 const bathVol = sub.residents * sub.bathLiters * 2; // 2 baths per day
