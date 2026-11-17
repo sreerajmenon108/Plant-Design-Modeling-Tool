@@ -56,7 +56,7 @@
         <div id="loading-overlay" class="hidden fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-50 flex items-center justify-center">
             <div class="bg-white px-6 py-4 rounded-2xl shadow-xl flex items-center space-x-3 border border-slate-100">
                 <div class="w-5 h-5 border-2 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
-                <span class="text-sm font-semibold text-slate-700">Syncing securely with Google Sheets...</span>
+                <span class="text-sm font-semibold text-slate-700">Syncing with DB...</span>
             </div>
         </div>
 
@@ -151,17 +151,17 @@
                             <span class="text-xs text-slate-400">Calculated per checked bath period below</span>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Teeth Brushing Duration / Period (sec)</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Teeth Brushing Duration / Period(Morning or Evening) (sec)</label>
                             <input type="number" id="res_brushSec" value="50" min="0" max="300" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
                             <span class="text-xs text-slate-400">Calculated per checked brushing period below</span>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Handwashing Duration / Period (sec)</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Handwashing Duration / Period(Morning or Evening) (sec)</label>
                             <input type="number" id="res_handSec" value="30" min="0" max="300" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
                             <span class="text-xs text-slate-400">Calculated per checked handwash period below</span>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Kitchen Cleaning Duration / Period (sec)</label>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Kitchen Cleaning Duration / Period(Morning or Evening) (sec)</label>
                             <input type="number" id="res_kitchenSec" value="180" min="0" max="900" required class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm">
                             <span class="text-xs text-slate-400">Calculated per checked kitchen period below</span>
                         </div>
@@ -686,7 +686,7 @@
                 const data = await res.json();
                 showLoading(false);
                 if (data.status === 'success') {
-                    alert("Your household parameters and peak timing choices were saved to Google Sheets!");
+                    alert("Your household parameters and peak timing choices were saved!");
                 }
             } catch (err) {
                 showLoading(false);
